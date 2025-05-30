@@ -52,7 +52,7 @@ const ContactPage = () => {
     <RevealOnScroll className="max-w-7xl mx-auto px-6">
       <div className="relative w-full overflow-hidden">
         {/* Header Section */}
-        <section className="relative max-w-7xl mx-auto my-6 py-20 px-6 md:px-8 lg:px-10 border rounded-2xl bg-foreground/2">
+        <section className="relative max-w-7xl mx-auto my-6 py-20 px-6 md:px-8 lg:px-10 border rounded-2xl bg-foreground/2 font-montserrat">
           {!isMobile && (
             <GlowingEffect
               spread={40}
