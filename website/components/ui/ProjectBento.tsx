@@ -133,7 +133,7 @@ export const ProjectBentoItem = ({
               >
                 {Icon && <Icon className="w-5 h-5" />}
                 <span>{tech}</span>
-                {isGit && <Link href={link}><ArrowUpRight className="w-6 h-6 bg-foreground/10 rounded-full p-1 cursor-pointer" /></Link>}
+                {isGit && link && <Link href={link}><ArrowUpRight className="w-6 h-6 bg-foreground/10 rounded-full p-1 cursor-pointer" /></Link>}
               </div>
             );
           })}
