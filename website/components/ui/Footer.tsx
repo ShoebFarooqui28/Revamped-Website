@@ -20,7 +20,7 @@ const Footer = () => {
         />
 
         <RevealOnScroll delay={0.5} className="absolute flex flex-col gap-8">
-          <div className="bg-foreground/10 py-1 rounded-full flex flex-row items-center justify-center gap-2">
+          <div className="bg-foreground/10 py-1 rounded-full flex flex-row items-center justify-center gap-2 w-[80%] mx-auto">
             <div className="relative flex items-center">
               <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500 shadow-[0_0_8px_2px_rgba(109,36,109,0.8)]"></span>
               <span className="absolute inline-flex h-full w-full rounded-full bg-purple-500 opacity-100 animate-ping"></span>
@@ -55,7 +55,7 @@ const Footer = () => {
             </Link>
           </div>
 
-          <div className="text-sm text-center text-foreground/60">
+          <div className="text-xs text-center text-foreground/60">
             © {new Date().getFullYear()} Shoeb Farooqui. All rights reserved.
           </div>
         </RevealOnScroll>
