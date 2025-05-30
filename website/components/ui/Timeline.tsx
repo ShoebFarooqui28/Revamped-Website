@@ -12,6 +12,13 @@ interface TimelineEntry {
   title: string;
   content: React.ReactNode;
 }
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+  return isMobile;
+};
 
 export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -32,13 +39,15 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
   const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
-
+  const isMobile = useIsMobile();
+  
   return (
     <div
       className="w-full bg-background font-sans md:px-10 font-montserrat"
       ref={containerRef}
     >
       <div className="relative max-w-7xl m-6 md:mx-auto py-20 px-6 md:px-8 lg:px-10 border rounded-2xl bg-foreground/2">
+      {!isMobile && (
         <GlowingEffect
           spread={40}
           glow={true}
@@ -46,6 +55,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           proximity={64}
           inactiveZone={0.01}
         />
+      )}
         <h2 className="flex items-center gap-2 text-3xl mb-4 font-italiana max-w-4xl font-bold text-foreground">
           <CircleUserRound size={28} color="#BF40BF" /> About My Journey
         </h2>

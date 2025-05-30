@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "@/components/ui/Footer";
 import { GlowingEffect } from "@/components/ui/GlowingEffect";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
@@ -9,6 +9,14 @@ import { Mail, Phone } from "lucide-react";
 const ContactPage = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
+
+  const useIsMobile = () => {
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+      setIsMobile(window.innerWidth < 768);
+    }, []);
+    return isMobile;
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -39,19 +47,21 @@ const ContactPage = () => {
       setStatus("Failed to send. Try again.");
     }
   };
-
+  const isMobile = useIsMobile();
   return (
     <RevealOnScroll className="max-w-7xl mx-auto px-6">
       <div className="relative w-full overflow-hidden">
         {/* Header Section */}
         <section className="relative max-w-7xl mx-auto my-6 py-20 px-6 md:px-8 lg:px-10 border rounded-2xl bg-foreground/2">
-          <GlowingEffect
-            spread={40}
-            glow={true}
-            disabled={false}
-            proximity={64}
-            inactiveZone={0.01}
-          />
+          {!isMobile && (
+            <GlowingEffect
+              spread={40}
+              glow={true}
+              disabled={false}
+              proximity={64}
+              inactiveZone={0.01}
+            />
+          )}
           <h2 className="flex items-center gap-2 text-2xl md:text-3xl mb-4 font-italiana font-bold text-foreground">
             <Phone size={28} color="#BF40BF" /> Get in Touch
           </h2>
@@ -67,13 +77,15 @@ const ContactPage = () => {
           <div className="relative bg-background/70 backdrop-blur-md border border-foreground/10 rounded-2xl shadow-xl p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="rounded-2xl flex flex-col gap-6">
-                <GlowingEffect
-                  spread={40}
-                  glow={true}
-                  disabled={false}
-                  proximity={64}
-                  inactiveZone={0.01}
-                />
+                {!isMobile && (
+                  <GlowingEffect
+                    spread={40}
+                    glow={true}
+                    disabled={false}
+                    proximity={64}
+                    inactiveZone={0.01}
+                  />
+                )}
                 <div>
                   <label
                     htmlFor="name"
@@ -154,13 +166,15 @@ const ContactPage = () => {
           {/* Contact Info */}
           <div className="space-y-8">
             <div className="relative flex flex-col gap-6 bg-foreground/2 p-8 border rounded-2xl">
-            <GlowingEffect
+              {!isMobile && (
+                <GlowingEffect
                   spread={40}
                   glow={true}
                   disabled={false}
                   proximity={64}
                   inactiveZone={0.01}
                 />
+              )}
               <div className="flex items-start gap-4">
                 <Mail size={24} color="#BF40BF" />
                 <div>

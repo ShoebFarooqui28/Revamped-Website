@@ -1,5 +1,14 @@
 import { cn } from "@/lib/utils";
 import { GlowingEffect } from "./GlowingEffect";
+import { useEffect, useState } from "react";
+
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+  return isMobile;
+};
 
 export const BentoGrid = ({
   className,
@@ -23,12 +32,13 @@ export const BentoGrid = ({
 export const BentoGridItem = ({
   className,
   title,
-  description
+  description,
 }: {
   className?: string;
   title?: string | React.ReactNode;
   description?: string | React.ReactNode;
 }) => {
+  const isMobile = useIsMobile();
   return (
     <div
       className={cn(
@@ -36,21 +46,19 @@ export const BentoGridItem = ({
         className
       )}
     >
-      <GlowingEffect
-        spread={40}
-        glow={true}
-        disabled={false}
-        proximity={64}
-        inactiveZone={0.01}
-      />
+      {!isMobile && (
+        <GlowingEffect
+          spread={40}
+          glow={true}
+          disabled={false}
+          proximity={64}
+          inactiveZone={0.01}
+        />
+      )}
 
-      <h1 className="text-2xl font-bold font-italiana text-accent">
-        {title}
-      </h1>
-      
-      <p>
-        {description}
-      </p>
+      <h1 className="text-2xl font-bold font-italiana text-accent">{title}</h1>
+
+      <p>{description}</p>
     </div>
   );
 };

@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { GlowingEffect } from "./GlowingEffect";
@@ -27,6 +30,7 @@ import {
 import { FaJava } from "react-icons/fa";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+
 const techIcons: {
   [key: string]: React.ComponentType<{ className?: string }>;
 } = {
@@ -50,6 +54,14 @@ const techIcons: {
   docker: SiDocker,
   neovim: SiNeovim,
   shadcn: SiShadcnui,
+};
+
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+  return isMobile;
 };
 
 export const ProjectBentoGrid = ({
@@ -86,15 +98,19 @@ export const ProjectBentoItem = ({
   stack?: string[];
   link?: string;
 }) => {
+  const isMobile = useIsMobile();
+
   return (
     <div className="relative flex flex-col font-montserrat rounded-2xl border">
-      <GlowingEffect
-        spread={40}
-        glow={true}
-        disabled={false}
-        proximity={64}
-        inactiveZone={0.01}
-      />
+      {!isMobile && (
+        <GlowingEffect
+          spread={40}
+          glow={true}
+          disabled={false}
+          proximity={64}
+          inactiveZone={0.01}
+        />
+      )}
       <div
         className={cn(
           "relative group/bento shadow-input row-span-1 rounded-xl p-6 h-60 md:h-70",
@@ -133,7 +149,11 @@ export const ProjectBentoItem = ({
               >
                 {Icon && <Icon className="w-5 h-5" />}
                 <span>{tech}</span>
-                {isGit && link && <Link href={link}><ArrowUpRight className="w-6 h-6 bg-foreground/10 rounded-full p-1 cursor-pointer" /></Link>}
+                {isGit && link && (
+                  <Link href={link}>
+                    <ArrowUpRight className="w-6 h-6 bg-foreground/10 rounded-full p-1 cursor-pointer" />
+                  </Link>
+                )}
               </div>
             );
           })}
