@@ -1,5 +1,4 @@
 "use client";
-
 import Navbar from "@/components/ui/Navbar";
 
 export default function Layout({
@@ -11,7 +10,6 @@ export default function Layout({
     <>
       <Navbar/>
       <main>{children}</main>
-      
     </>
   );
 }
