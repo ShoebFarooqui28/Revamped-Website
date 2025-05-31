@@ -106,3 +106,7 @@
     }
   }
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
